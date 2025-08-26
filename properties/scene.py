@@ -4,27 +4,27 @@ from bpy.types import Scene
 def register_properties():
   Scene.should_duplicate = bpy.props.BoolProperty(
     name="Non-Destructive",
-    description="Duplicates mesh with collider to allow non-destructive approach",
+    description="Duplicates the Mesh with collider to allow non-destructive approach",
     default=True
   )
   Scene.should_rename = bpy.props.BoolProperty(
     name="Update Name",
-    description="Adds SM_ prefix to mesh name and renames collider to UBX_/UCX_SM_[MeshName]",
+    description="Adds SM_ prefix to Mesh name and renames collider to UBX_/UCX_SM_[MeshName]",
     default=True
   )
   Scene.should_clear_materials = bpy.props.BoolProperty(
     name="Clear Materials",
-    description="Removes all materials from selected mesh. Helps to avoid creating Material Slot in Unreal with improper naming",
+    description="Removes all materials from selected mesh. Helps avoid creating material slots in Unreal with improper names",
     default=True
   )
   Scene.should_apply_modifiers = bpy.props.BoolProperty(
     name="Apply Modifiers",
-    description="Applies all modifiers used within a mesh",
+    description="Applies all modifiers used within the Mesh",
     default=True
   )
   Scene.should_recalculate_normals = bpy.props.BoolProperty(
     name="Recalculate Normals",
-    description="Recalculates Normals with inside flag as false",
+    description="Recalculates Normals with 'inside' flag as false",
     default=True
   )
   Scene.should_apply_scale = bpy.props.BoolProperty(
@@ -34,12 +34,12 @@ def register_properties():
   )
   Scene.should_reset_origin = bpy.props.BoolProperty(
     name="Reset Origin",
-    description="Sets origin of mesh and colliders to the lowest center point",
+    description="Sets origin of the Mesh and colliders to the lowest center point",
     default=True
   )
   Scene.should_place_to_world_origin = bpy.props.BoolProperty(
     name="Place to World Origin",
-    description="Places mesh at the center of the world (0, 0, 0)",
+    description="Places the Mesh at the center of the world (0, 0, 0)",
     default=True
   )
 

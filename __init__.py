@@ -4,7 +4,7 @@ bl_info = {
   "version": (1, 0, 0),
   "blender": (4, 3, 0),
   "location": "3D Viewport > Sidebar > BUMLi",
-  "description": "Blender-Unreal Mesh Linter. Allows to properly prepare mesh before export it to Unreal",
+  "description": "Blender-Unreal Mesh Linter. Allows to properly prepare the mesh before exporting it to Unreal",
   "category": "Development",
 }
 

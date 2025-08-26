@@ -5,7 +5,7 @@ from ..helpers import exports, utils
 class MESH_OT_export(bpy.types.Operator):
   bl_idname = "mesh.export"
   bl_label = "Export mesh"
-  bl_description = "Export mesh with its collider"
+  bl_description = "Exports the mesh with its collider"
   bl_options = {'REGISTER', 'UNDO'}
 
   def execute(self, context):
@@ -13,7 +13,7 @@ class MESH_OT_export(bpy.types.Operator):
     selected = context.selected_objects
 
     if active is None or not selected:
-      self.report({'ERROR'}, "No active object selected")
+      self.report({'ERROR'}, "No active object is selected")
       return {'CANCELLED'}
 
     if context.mode != 'OBJECT':
@@ -24,7 +24,7 @@ class MESH_OT_export(bpy.types.Operator):
 
     export_dir = getattr(context.scene, "export_directory", None)
     if not export_dir:
-      self.report({'ERROR'}, "Export directory was not selected")
+      self.report({'ERROR'}, "Export directory is not selected")
       return {'CANCELLED'}
 
     export_path = os.path.join(export_dir, f"{active.name}.fbx")

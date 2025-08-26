@@ -4,7 +4,7 @@ from ..helpers import names, origins, utils
 class MESH_OT_fix(bpy.types.Operator):
   bl_idname = "mesh.fix"
   bl_label = "Fix mesh"
-  bl_description = "Apply changes to the mesh according to selected rules"
+  bl_description = "Applies changes to the mesh according to the selected rules"
   bl_options = {"REGISTER", "UNDO"}
     
   def execute(self, context):
@@ -12,7 +12,7 @@ class MESH_OT_fix(bpy.types.Operator):
     selected = bpy.context.active_object
 
     if len(selected.children) > 1:
-      self.report({'WARNING'}, f"Mesh '{selected.name}' has more than 1 child. Collision naming may be broken")
+      self.report({'WARNING'}, f"Mesh '{selected.name}' has more than 1 child. Collision naming may be incorrect")
     
     if (scene.should_duplicate):
       selected = utils.duplicate_hierarchy(selected)
