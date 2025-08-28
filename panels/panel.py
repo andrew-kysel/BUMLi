@@ -10,7 +10,7 @@ class VIEW3D_PT_linter_panel(bpy.types.Panel):
   bl_space_type = "VIEW_3D"
   bl_region_type = "UI"
   bl_category = "BUMLi"
-  bl_label = "Mesh Linter"
+  bl_label = "BUMLi"
 
   def draw(self, context):
     layout = self.layout
