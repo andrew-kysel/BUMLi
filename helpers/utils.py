@@ -1,49 +1,53 @@
-from bpy import ops, context
+import bpy
 from .names import _strip_suffix
 
-def place_to_world_origin(obj):
-  ops.object.select_all(action='DESELECT')
+def place_to_world_origin(obj, context):
+  bpy.ops.object.select_all(action='DESELECT')
 
   obj.select_set(True)
   context.view_layer.objects.active = obj
 
-  ops.object.rotation_clear(clear_delta=False)
-  ops.object.location_clear(clear_delta=False)
+  bpy.ops.object.rotation_clear(clear_delta=False)
+  bpy.ops.object.location_clear(clear_delta=False)
 
-def recalculate_normals(obj):
-  ops.object.mode_set(mode='OBJECT')
-  ops.object.select_all(action='DESELECT')
+def recalculate_normals(obj, context):
+  bpy.ops.object.mode_set(mode='OBJECT')
+  bpy.ops.object.select_all(action='DESELECT')
 
   obj.select_set(True)
   context.view_layer.objects.active = obj
 
-  ops.object.mode_set(mode='EDIT')
-  ops.mesh.select_all(action='SELECT')
-  ops.mesh.normals_make_consistent(inside=False)
-  ops.object.mode_set(mode='OBJECT')
+  bpy.ops.object.mode_set(mode='EDIT')
+  bpy.ops.mesh.select_all(action='SELECT')
+  bpy.ops.mesh.normals_make_consistent(inside=False)
+  bpy.ops.object.mode_set(mode='OBJECT')
 
-def apply_modifiers(obj):
+def apply_modifiers(obj, context):
   context.view_layer.objects.active = obj
-  ops.object.convert(target='MESH')
+  bpy.ops.object.convert(target='MESH')
 
-def apply_scale(obj):
+def apply_scale(obj, context):
   context.view_layer.objects.active = obj
-  ops.object.transform_apply(location=False, rotation=False, scale=True)
+  bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+
+def apply_rotation(obj, context):
+  context.view_layer.objects.active = obj
+  bpy.ops.object.transform_apply(location=False, rotation=True, scale=False)
 
 def remove_materials(obj):
   obj.data.materials.clear()
 
-def duplicate_hierarchy(parent):
+def duplicate_hierarchy(parent, context):
   hierarchy = {parent}
   hierarchy.update(parent.children_recursive)
 
-  ops.object.select_all(action='DESELECT')
+  bpy.ops.object.select_all(action='DESELECT')
 
   for obj in hierarchy:
     obj.select_set(True)
   context.view_layer.objects.active = parent
 
-  ops.object.duplicate()
+  bpy.ops.object.duplicate()
   duplicates = list(context.selected_objects)
 
   # Find duplicated parent by name. Quite dumb approach, but it works...
@@ -62,10 +66,10 @@ def toggle_display_type(colliders):
         collider.display_type = 'TEXTURED'
 
 # TODO: refactor these two methods, I think they are unnecessary complicated
-def select_hierarchy():
+def select_hierarchy(context):
   active_object = context.active_object
 
-  ops.object.select_all(action='DESELECT')
+  bpy.ops.object.select_all(action='DESELECT')
   active_object.select_set(True)
   
   for obj in active_object.children:

@@ -10,7 +10,7 @@ class VIEW3D_PT_linter_panel(bpy.types.Panel):
   bl_space_type = "VIEW_3D"
   bl_region_type = "UI"
   bl_category = "BUMLi"
-  bl_label = "BUMLi"
+  bl_label = "Mesh Linter"
 
   def draw(self, context):
     layout = self.layout
@@ -21,14 +21,15 @@ class VIEW3D_PT_linter_panel(bpy.types.Panel):
     
     # Left Checkboxes
     col1 = row.column(align=True)
-    col1.prop(scene, "should_clear_materials")
     col1.prop(scene, "should_apply_scale")
+    col1.prop(scene, "should_apply_rotation")
     col1.prop(scene, "should_apply_modifiers")
-    col1.prop(scene, "should_recalculate_normals")
+    col1.prop(scene, "should_clear_materials")
 
     # Right Checkboxes
     col2 = row.column(align=True)
     col2.prop(scene, "should_rename")
+    col2.prop(scene, "should_recalculate_normals")
     col2.prop(scene, "should_reset_origin")
     col2.prop(scene, "should_place_to_world_origin")
     

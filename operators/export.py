@@ -20,7 +20,7 @@ class MESH_OT_export(bpy.types.Operator):
       bpy.ops.object.mode_set(mode='OBJECT')
 
     bpy.ops.object.select_all(action='DESELECT')
-    utils.select_hierarchy()
+    utils.select_hierarchy(context)
 
     export_dir = getattr(context.scene, "export_directory", None)
     if not export_dir:

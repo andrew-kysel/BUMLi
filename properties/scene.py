@@ -32,6 +32,11 @@ def register_properties():
     description="I have nothing to add here...",
     default=True
   )
+  Scene.should_apply_rotation = bpy.props.BoolProperty(
+    name="Apply Rotation",
+    description="I have nothing to add here as well...",
+    default=True
+  )
   Scene.should_reset_origin = bpy.props.BoolProperty(
     name="Reset Origin",
     description="Sets origin of the Mesh and colliders to the lowest center point",

@@ -1,32 +1,32 @@
-from bpy import ops, context
+import bpy 
 from mathutils import Vector
 
-def reset_all(obj):
-  _hierarchy_origin_to_geometry(obj)
+def reset_all(obj, context):
+  _hierarchy_origin_to_geometry(obj, context)
   _snap_origins_to_lowest_z(obj)
     
   # Add 3D cursor to parents origin and align its children with it
-  ops.view3d.snap_cursor_to_active()
-  ops.view3d.snap_selected_to_cursor(use_offset=False)
+  bpy.ops.view3d.snap_cursor_to_active()
+  bpy.ops.view3d.snap_selected_to_cursor(use_offset=False)
 
-  _snap_children_to_cursor(obj)
+  _snap_children_to_cursor(obj, context)
 
-  ops.view3d.snap_cursor_to_center()
-  ops.object.select_all(action='DESELECT')
+  bpy.ops.view3d.snap_cursor_to_center()
+  bpy.ops.object.select_all(action='DESELECT')
   obj.select_set(True)
   context.view_layer.objects.active = obj
 
-def _hierarchy_origin_to_geometry(parent):
+def _hierarchy_origin_to_geometry(parent, context):
   hierarchy = {parent}
   hierarchy.update(parent.children_recursive)
 
-  ops.object.select_all(action='DESELECT')
+  bpy.ops.object.select_all(action='DESELECT')
 
   for obj in hierarchy:
     obj.select_set(True)
   context.view_layer.objects.active = parent
 
-  ops.object.origin_set(type='ORIGIN_GEOMETRY', center='MEDIAN')       
+  bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY', center='MEDIAN')       
 
 def _snap_origins_to_lowest_z(parent):
   hierarchy = {parent}
@@ -51,12 +51,12 @@ def _snap_origins_to_lowest_z(parent):
     # Move child origin to target point
     obj.location += obj.matrix_world.to_quaternion() @ local_offset 
 
-def _snap_children_to_cursor(parent):
+def _snap_children_to_cursor(parent, context):
   children = parent.children_recursive
   for child in children:
-    ops.object.select_all(action='DESELECT')
+    bpy.ops.object.select_all(action='DESELECT')
 
     child.select_set(True)
     context.view_layer.objects.active = child
 
-    ops.view3d.snap_selected_to_cursor(use_offset=False)       
+    bpy.ops.view3d.snap_selected_to_cursor(use_offset=False)       
