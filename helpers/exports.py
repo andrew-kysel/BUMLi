@@ -3,12 +3,12 @@ from bpy import ops
 def as_static_mesh(filepath: str):
   ops.export_scene.fbx(
     filepath=filepath,
-    check_existing=True,
+    check_existing=False,
     use_selection=True,
     object_types={'MESH'},
     use_custom_props=False,
     global_scale=1.0,
-    apply_scale_options='FBX_SCALE_ALL',
+    apply_scale_options='FBX_SCALE_CUSTOM',
     axis_forward='-Z',
     axis_up='Y',
     apply_unit_scale=True,
